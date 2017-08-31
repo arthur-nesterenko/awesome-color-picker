@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ColorDropDown from './../components/color-dropdown';
+import ColorDropDown from './color-dropdown-container';
 import RgbDropDown from './../components/rgb-dropdown';
 import ColorInput from './../components/color-input'
 import './../styles/styles.scss';

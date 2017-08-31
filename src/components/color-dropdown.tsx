@@ -1,14 +1,16 @@
 import * as React from 'react';
 
 interface ColorDropDownProps {
-    // onChange : void, onClick : void,
-    color?: string
+    // onChange : void,
+    onClick : any,
+    color?: string,
+    open : string
 }
 
-const ColorDropDown : React.SFC < ColorDropDownProps > = ({color}) => (
+const ColorDropDown : React.SFC < ColorDropDownProps > = ({color, open, onClick}) => (
     <div className='awesomeColorDropDown'>
-        <span>▼</span>
-        <ul>
+        <span onClick={onClick}>▼</span>
+        <ul className={open}>
             <li>1</li>
             <li>2</li>
             <li>3</li>
