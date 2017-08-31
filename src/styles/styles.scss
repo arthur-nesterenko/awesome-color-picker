@@ -1,0 +1,77 @@
+$greyColor: #eee;
+@mixin makeAwesomeSpan() {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid $greyColor;
+    padding:  5px;
+
+    &:hover{
+        cursor: pointer;
+    }
+  }
+
+
+.awesomeColorPicker{
+    display: inline-flex;
+    position: relative;
+    border: 1px solid $greyColor;
+    &>*{
+        padding: 30px;
+        border-right: 1px solid $greyColor;
+
+        &::last-child{
+            border-right: none;
+        }
+    }
+
+   
+    ul{
+        display: none;
+        flex-direction: column;
+        li{
+            list-style: none;
+        }
+    }
+
+
+/**/
+
+
+ .awesomeColorInput{
+        line-height: 40px;
+        padding: 5px;
+        border-bottom: none;
+        border-top: none;
+        border-left: none;
+ }   
+
+ .awesomeColorDropDown{
+
+    &>span{
+        @include makeAwesomeSpan()
+    }
+
+
+ }
+ .awesomeRgbDropDown{
+    &> span{
+        @include makeAwesomeSpan()
+    }
+ }
+
+
+
+ .awesomeOpen{
+     display: flex
+ }
+
+ .awesomeClose{
+     display: none
+ }
+
+
+}
+
+
+

@@ -1,0 +1,28 @@
+{
+  "name": "awesome-color-picker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack --progress --colors --watch",
+    "build": "webpack -p"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.0",
+    "@types/react-dom": "^15.5.2",
+    "@types/tinycolor2": "1.4.0",
+    "awesome-typescript-loader": "^3.2.2",
+    "css-loader": "^0.28.7",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^2.0.6",
+    "sass-loader": "^6.0.6",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.18.2",
+    "typescript": "^2.4.2",
+    "typings-for-css-modules-loader": "^1.5.0"
+  }
+}
