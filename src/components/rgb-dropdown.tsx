@@ -10,7 +10,10 @@ interface RgbDropDownProps {
 
 const RgbDropDown : React.SFC < RgbDropDownProps > = ({color, isOpen, onTrigger}) => (
     <div className='awesomeRgbDropDown'>
-        <button onClick={onTrigger} style={{
+        <button
+            className='awesomeBtn'
+            onClick={onTrigger}
+            style={{
             color
         }}></button>
         <ul className={isOpen

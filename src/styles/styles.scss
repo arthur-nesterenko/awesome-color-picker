@@ -4,12 +4,14 @@ $greyColor: #eee;
     border: 1px solid $greyColor;
   }
 
-@mixin make-mwesome-span() {
+@mixin make-awesome-btn() {
     display: block;
-    width: 15px;
-    height: 15px;
+    background: transparent;
+    width: 30px;
+    height: 30px;
     @include default-border();
     padding:  5px;
+    outline:none;
 
     &:hover{
         cursor: pointer;
@@ -56,21 +58,19 @@ $greyColor: #eee;
         border-left: none;
  }   
 
- .awesomeColorDropDown{
-
-    &>span{
-        @include make-mwesome-span()
-    }
+//  .awesomeColorDropDown{
 
 
+
+//  }
+//  .awesomeRgbDropDown{
+   
+//  }
+
+
+ .awesomeBtn{
+    @include make-awesome-btn()
  }
- .awesomeRgbDropDown{
-    &> span{
-        @include make-mwesome-span()
-    }
- }
-
-
 
  .awesomeOpen{
      display: flex
