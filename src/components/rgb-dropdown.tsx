@@ -1,16 +1,21 @@
 import * as React from 'react';
 import RangeInput from './range-input'
+import Dropdown from './../hoc/dropdown'
 
 interface RgbDropDownProps {
-    color?: string
+    color?: string,
+    onTrigger : any,
+    isOpen : boolean
 }
 
-const RgbDropDown : React.SFC < RgbDropDownProps > = ({color}) => (
+const RgbDropDown : React.SFC < RgbDropDownProps > = ({color, isOpen, onTrigger}) => (
     <div className='awesomeRgbDropDown'>
-        <span style={{
+        <button onClick={onTrigger} style={{
             color
-        }}></span>
-        <ul>
+        }}></button>
+        <ul className={isOpen
+            ? 'awesomeOpen'
+            : ''}>
             <li>
                 <div>R</div>
                 <div>
@@ -37,4 +42,4 @@ const RgbDropDown : React.SFC < RgbDropDownProps > = ({color}) => (
 RgbDropDown.defaultProps = {
     color: 'white'
 }
-export default RgbDropDown;
+export default Dropdown(RgbDropDown);

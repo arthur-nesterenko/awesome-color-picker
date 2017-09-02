@@ -1,16 +1,20 @@
 import * as React from 'react';
+import Dropdown from './../hoc//dropdown'
 
 interface ColorDropDownProps {
     // onChange : void,
-    onClick : any,
+    onClick?: any,
     color?: string,
-    open : string
+    isOpen : string,
+    onTrigger : any
 }
 
-const ColorDropDown : React.SFC < ColorDropDownProps > = ({color, open, onClick}) => (
+const ColorDropDown : React.SFC < ColorDropDownProps > = ({color, isOpen, onClick, onTrigger}) => (
     <div className='awesomeColorDropDown'>
-        <span onClick={onClick}>▼</span>
-        <ul className={open}>
+        <button onClick={onTrigger}>▼</button>
+        <ul className={isOpen
+            ? 'awesomeOpen'
+            : ''}>
             <li>1</li>
             <li>2</li>
             <li>3</li>
@@ -21,4 +25,4 @@ const ColorDropDown : React.SFC < ColorDropDownProps > = ({color, open, onClick}
 ColorDropDown.defaultProps = {
     color: 'white'
 }
-export default ColorDropDown;
+export default Dropdown(ColorDropDown);
