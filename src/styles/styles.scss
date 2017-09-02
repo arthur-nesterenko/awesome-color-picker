@@ -49,20 +49,51 @@ $greyColor: #eee;
 
 /**/
 
+.awesomeColorSquare{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        padding: 5px;
+        @include default-border();
 
+}
  .awesomeColorInput{
         line-height: 40px;
         padding: 5px;
         border-bottom: none;
         border-top: none;
         border-left: none;
+        font-size: 16px;
+        text-transform: uppercase;
+        text-align: center;
  }   
 
-//  .awesomeColorDropDown{
+ .awesomeColorDropDown{
+
+  
+    ul{
+        max-height: 300px;
+        overflow: auto;
+
+    }
+
+    li{
+        display: flex;
+        flex-direction: row;
+        justify-content:  space-between;
+        align-items: center;
+        padding: 15px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid $greyColor;
 
 
+        &::last-child{
+            border-bottom: none;
+        }
+    }
 
-//  }
+
+ }
 //  .awesomeRgbDropDown{
    
 //  }
@@ -71,7 +102,9 @@ $greyColor: #eee;
  .awesomeBtn{
     @include make-awesome-btn()
  }
-
+.awesomeActive{
+    background: #f5f5f5;
+}
  .awesomeOpen{
      display: flex
  }

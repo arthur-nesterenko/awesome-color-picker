@@ -3,7 +3,7 @@ import RgbDropDown from './../components/rgb-dropdown';
 import ColorDropDown from './../components//color-dropdown';
 import ColorInput from './../components/color-input'
 import './../styles/styles.scss';
-import * as TinyColor from 'tinycolor2';
+import Color from './../lib/color';
 
 interface ColorPickerProps {
     value?: string
@@ -11,24 +11,33 @@ interface ColorPickerProps {
     colors?: Array < string >
 }
 
+interface ColorPickerState {
+    currentColor : any
+}
+
 class ColorPicker extends React.PureComponent < ColorPickerProps,
-undefined > {
+ColorPickerState > {
 
-    constructor(props : ColorPickerProps)
-    {
-        super(props);
+    public static defaultProps : Partial < ColorPickerProps > = {
+        colors: Color.colors
+    };
 
-        const test = TinyColor('red');
+    state = {
+        currentColor: Color.hexColors[0]
+    }
 
-        console.log(test)
+    onChange(newColor : string) {
+
+        console.log('new color', newColor);
 
     }
 
     render() : JSX.Element {
+
         return <div className='awesomeColorPicker'>
-                <ColorInput/>
+                <ColorInput value={this.state.currentColor as string}/>
                 <RgbDropDown/>
-                <ColorDropDown/>
+                <ColorDropDown colors={this.props.colors}/>
             </div>
     }
 }
