@@ -12,7 +12,9 @@ interface ColorPickerProps {
 }
 
 interface ColorPickerState {
-    currentColor : any
+    currentColor : any,
+    prevColor?: string
+
 }
 
 class ColorPicker extends React.PureComponent < ColorPickerProps,
@@ -28,9 +30,10 @@ ColorPickerState > {
 
     onChange = (newColor : string) => {
 
-        this.setState({
+        this.setState(prevState => ({
+            prevColor: prevState.currentColor,
             currentColor: Color.getHexColor(newColor)
-        })
+        }));
         if (this.props.onChange) {
             this
                 .props
@@ -44,9 +47,14 @@ ColorPickerState > {
 
     render() : JSX.Element {
 
+        const {currentColor, prevColor} = this.state;
+
         return <div className='awesomeColorPicker'>
-                <ColorInput value={this.state.currentColor as string}/>
-                <RgbDropDown/>
+                <ColorInput value={currentColor}/>
+                <RgbDropDown
+                    currentColor={currentColor}
+                    prevColor={prevColor}
+                    onChange={this.onChange}/>
                 <ColorDropDown onChange={this.onChange} colors={this.props.colors}/>
             </div>
     }

@@ -1,48 +1,44 @@
 import * as React from 'react';
-import RangeInput from './range-input'
 import Dropdown from './../hoc/dropdown'
+import RgbContainer from './../containers//rgb-container';
 
 interface RgbDropDownProps {
-    color?: string,
+    currentColor : string,
     onTrigger : any,
-    isOpen : boolean
+    isOpen : boolean,
+    onChange : void,
+    onClose : any,
+    prevColor?: string
 }
 
-const RgbDropDown : React.SFC < RgbDropDownProps > = ({color, isOpen, onTrigger}) => (
+const RgbDropDown : React.SFC < RgbDropDownProps > = ({
+    currentColor,
+    prevColor,
+    isOpen,
+    onClose,
+    onTrigger,
+    onChange
+}) => (
     <div className='awesomeRgbDropDown'>
         <button
             className='awesomeBtn'
             onClick={onTrigger}
             style={{
-            color
+            background: currentColor
         }}></button>
         <ul className={isOpen
             ? 'awesomeOpen'
             : ''}>
-            <li>
-                <div>R</div>
-                <div>
-                    <RangeInput name='r'/>
-                </div>
-            </li>
-            <li>
-                <div>G</div>
-                <div>
-                    <RangeInput name='g'/>
-                </div>
-            </li>
 
-            <li>
-                <div>B</div>
-                <div>
-                    <RangeInput name='b'/>
-                </div>
-            </li>
+            <RgbContainer
+                onClose={onClose}
+                onChange={onChange}
+                prevColor={prevColor}
+                activeColor={currentColor}/>
+
         </ul>
     </div>
 );
 
-RgbDropDown.defaultProps = {
-    color: 'white'
-}
+// RgbDropDown.defaultProps = {     color: 'white' }
 export default Dropdown(RgbDropDown);

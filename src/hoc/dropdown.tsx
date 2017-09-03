@@ -35,7 +35,6 @@ function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React
             }
         }
 
-        onOpen = () => this.setState({isOpen: true});
         onClose = () => this.setState({isOpen: false});
         onTrigger = () => this.setState((prevState) => ({
             isOpen: !prevState.isOpen
@@ -60,13 +59,14 @@ function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React
                     this.props.onChange(val);
                 }
             
+            this.onClose();
+
         }
 
         render() : JSX.Element {return <WrappedComponent
             {...this.props}
             {...this.state}
             onTrigger={this.onTrigger}
-            onOpen={this.onOpen}
             onClose={this.onClose}
             onSelect={this.onSelect}/>}
     }

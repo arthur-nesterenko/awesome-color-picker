@@ -3,6 +3,11 @@ interface ColorTypes {
     listOfColor : object
 }
 
+interface RgbObject {
+    R : number,
+    G : number,
+    B : number
+}
 class Color < ColorTypes > {
 
     red : number;
@@ -179,6 +184,36 @@ class Color < ColorTypes > {
         return color.indexOf('#') !== -1
             ? color
             : Color.listOfColors[color.toLowerCase()];
+
+    }
+
+    static toRgb(color : string) : RgbObject {
+
+        const HexColor = Color
+            .getHexColor(color)
+            .replace('#', '');
+
+        return {
+            R: parseInt(HexColor.substring(0, 2), 16),
+            G: parseInt(HexColor.substring(2, 4), 16),
+            B: parseInt(HexColor.substring(4, 6), 16)
+        }
+    }
+
+    static toHexFromRgb({R, G, B} : RgbObject) {
+
+        let r = R.toString(16);
+        let g = G.toString(16);
+        let b = B.toString(16);
+
+        if (r.length == 1) 
+            r = '0' + r;
+        if (g.length == 1) 
+            g = '0' + g;
+        if (b.length == 1) 
+            b = '0' + b;
+        
+        return `#${ (r + g + b).toUpperCase()}`;
 
     }
 
