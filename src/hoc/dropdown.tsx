@@ -43,32 +43,32 @@ function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React
 
         onSelect = (e : any) => {
             const target = e.target;
+            const parentNode = target.parentNode;
             const targetTagName = 'LI';
 
             const targerElem = (target.tagName === targetTagName)
                 ? target
-                : (target.parentNode.tagName === targetTagName)
+                : (parentNode.tagName === targetTagName)
                     ? target.parentNode
                     : undefined;
 
             if (targerElem) {
                 const val = targerElem.getAttribute('data-value');
                 this.setState({selected: val})
-            }
 
+                if (this.props.onChange) 
+                    this.props.onChange(val);
+                }
+            
         }
 
-        render() {
-
-            console.log(this.state)
-            return <WrappedComponent
-                {...this.props}
-                {...this.state}
-                onTrigger={this.onTrigger}
-                onOpen={this.onOpen}
-                onClose={this.onClose}
-                onSelect={this.onSelect}/>
-        }
+        render() : JSX.Element {return <WrappedComponent
+            {...this.props}
+            {...this.state}
+            onTrigger={this.onTrigger}
+            onOpen={this.onOpen}
+            onClose={this.onClose}
+            onSelect={this.onSelect}/>}
     }
 }
 

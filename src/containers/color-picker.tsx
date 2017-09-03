@@ -7,7 +7,7 @@ import Color from './../lib/color';
 
 interface ColorPickerProps {
     value?: string
-    onChange?: void,
+    onChange?: any,
     colors?: Array < string >
 }
 
@@ -26,10 +26,20 @@ ColorPickerState > {
         currentColor: Color.hexColors[0]
     }
 
-    onChange(newColor : string) {
+    onChange = (newColor : string) => {
 
-        console.log('new color', newColor);
-
+        this.setState({
+            currentColor: Color.getHexColor(newColor)
+        })
+        if (this.props.onChange) {
+            this
+                .props
+                .onChange({
+                    hex: Color.getHexColor(newColor),
+                    name: newColor,
+                    rgb: [0, 0, 0]
+                })
+        }
     }
 
     render() : JSX.Element {
@@ -37,7 +47,7 @@ ColorPickerState > {
         return <div className='awesomeColorPicker'>
                 <ColorInput value={this.state.currentColor as string}/>
                 <RgbDropDown/>
-                <ColorDropDown colors={this.props.colors}/>
+                <ColorDropDown onChange={this.onChange} colors={this.props.colors}/>
             </div>
     }
 }

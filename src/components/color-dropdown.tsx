@@ -46,6 +46,6 @@ const ColorDropDown : React.SFC < ColorDropDownProps > = ({
 )
 
 ColorDropDown.defaultProps = {
-    activeColor: 'white'
+    selected: 'white'
 }
 export default Dropdown(ColorDropDown);
