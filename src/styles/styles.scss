@@ -52,7 +52,7 @@ $greenColor: #81c784;
             align-items: center;
     
         }
-        
+
         li{
             list-style: none;
         }
@@ -111,14 +111,17 @@ $greenColor: #81c784;
 
 
  }
-//   .awesomeRgbDropDown{
-    
-//      }
+  .awesomeRgbDropDown{
+    li{
+        padding: 10px 20px;
+    }
+     }
 
 
 
  .awesomeBtn{
     @include make-awesome-btn();
+    
 
     &--default{
         background-color:$greyColor;
@@ -143,6 +146,36 @@ $greenColor: #81c784;
      display: none
  }
 
+
+ .awesomeRangeInput{
+     width: 100%; 
+    -webkit-appearance: none;
+    height: 10px;
+    outline: none;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        @include default-border();
+        height: 15px;
+        width: 15px;
+        border-radius: 100%;
+        background: $greyColor;
+        cursor: pointer;
+        // margin-top: -14px; 
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; 
+      }
+
+    &[name='R']{
+        background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(255, 0, 0) 100%);
+    }
+    &[name='G']{
+        background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 255, 0) 100%);
+    }
+
+    &[name='B']{
+        background-image: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 255) 100%);
+    }
+ }
 
 }
 

@@ -4,7 +4,6 @@ import Dropdown from './../hoc//dropdown'
 interface ColorDropDownProps {
     onChange : void,
     onClick?: any,
-    color?: string,
     isOpen : string,
     onTrigger : any,
     colors : Array < string >,
@@ -45,7 +44,4 @@ const ColorDropDown : React.SFC < ColorDropDownProps > = ({
     </div>
 )
 
-ColorDropDown.defaultProps = {
-    selected: 'white'
-}
 export default Dropdown(ColorDropDown);

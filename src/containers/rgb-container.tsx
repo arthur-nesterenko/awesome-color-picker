@@ -88,28 +88,14 @@ RgbContainerState > extends React.PureComponent {
 
     render() : JSX.Element {
 
-        const {B, G, R} = this.state.rgb;
+        const {rgb} = this.state;
 
         return <div>
-                <li>
-                    <div>R</div>
-                    <div>
-                        <RangeInput name='R' value={R} onChange={this.onChange}/>
-                    </div>
-                </li>
-                <li>
-                    <div>G</div>
-                    <div>
-                        <RangeInput name='G' value={G} onChange={this.onChange}/>
-                    </div>
-                </li>
+                {Object
+                    .keys(rgb)
+                    .map((key : any) => <li key={key}><RangeInput name={key} value={rgb[key]} onChange={this.onChange}/>
+                    </li>)}
 
-                <li>
-                    <div>B</div>
-                    <div>
-                        <RangeInput name='B' value={B} onChange={this.onChange}/>
-                    </div>
-                </li>
                 <li className='footer'>
                     <button
                         onClick={this.onClickBtn}

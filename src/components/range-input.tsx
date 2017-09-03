@@ -6,6 +6,12 @@ interface RangeInputProps {
     onChange?: any
 };
 
-const RangeInput : React.SFC < RangeInputProps > = (props) => (<input type="range" {...props} min='0' max='255'/>);
+const RangeInput : React.SFC < RangeInputProps > = (props) => (
+    <div>
+        <span>{props
+                .name
+                .toUpperCase()}</span>
+        <input className='awesomeRangeInput' type="range" {...props} min='0' max='255'/></div>
+);
 
 export default RangeInput;

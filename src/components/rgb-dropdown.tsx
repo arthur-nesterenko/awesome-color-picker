@@ -7,18 +7,10 @@ interface RgbDropDownProps {
     onTrigger : any,
     isOpen : boolean,
     onChange : void,
-    onClose : any,
-    prevColor?: string
+    onClose : any
 }
 
-const RgbDropDown : React.SFC < RgbDropDownProps > = ({
-    currentColor,
-    prevColor,
-    isOpen,
-    onClose,
-    onTrigger,
-    onChange
-}) => (
+const RgbDropDown : React.SFC < RgbDropDownProps > = ({currentColor, isOpen, onClose, onTrigger, onChange}) => (
     <div className='awesomeRgbDropDown'>
         <button
             className='awesomeBtn'
@@ -30,11 +22,7 @@ const RgbDropDown : React.SFC < RgbDropDownProps > = ({
             ? 'awesomeOpen'
             : ''}>
 
-            <RgbContainer
-                onClose={onClose}
-                onChange={onChange}
-                prevColor={prevColor}
-                activeColor={currentColor}/>
+            <RgbContainer onClose={onClose} onChange={onChange} activeColor={currentColor}/>
 
         </ul>
     </div>

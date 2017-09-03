@@ -7,7 +7,7 @@ interface DropdownState {
     selected : any
 }
 
-function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React.StatelessComponent < any >,) : React.ComponentClass < any > {
+function dropdown(WrappedComponent : React.ComponentClass < any > | React.StatelessComponent < any >,) : React.ComponentClass < any > {
     return class HOCDropDown extends React.PureComponent < any,
     DropdownState > {
 
@@ -63,12 +63,14 @@ function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React
 
         }
 
-        render() : JSX.Element {return <WrappedComponent
-            {...this.props}
-            {...this.state}
-            onTrigger={this.onTrigger}
-            onClose={this.onClose}
-            onSelect={this.onSelect}/>}
+        render() {
+            return <WrappedComponent
+                {...this.props}
+                {...this.state}
+                onTrigger={this.onTrigger}
+                onClose={this.onClose}
+                onSelect={this.onSelect}/>
+        }
     }
 }
 
