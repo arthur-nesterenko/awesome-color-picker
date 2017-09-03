@@ -3,21 +3,18 @@ interface RgbObject {
     G : number,
     B : number
 }
-class Color {
 
-    red : number;
-    blue : number;
-    green : number;
+const errMessage = (color : string) : string => `for ${color} is not supported format should be hex or css Name , all color names Supported by All Browsers (https://www.w3schools.com/colors/colors_names.asp)`;
 
-    constructor(color?: string) {
+/**
+ *
+ */
+const Color = {
 
-        this.red = 0;
-        this.green = 0,
-        this.blue = 0
-
-    }
-
-    static get listOfColors() : object {
+    /**
+     *
+     */
+    get listOfColors(): object {
         return {
             "aliceblue": "#f0f8ff",
             "antiquewhite": "#faebd7",
@@ -161,41 +158,78 @@ class Color {
             "yellow": "#ffff00",
             "yellowgreen": "#9acd32"
         };
-    }
-
-    static get colors() : Array < string > {
+    },
+    /**
+ *
+ */
+    get colors(): Array < string > {
 
         return Object.keys(this.listOfColors);
-    };
-
-    static get hexColors() : Array < string > {
+    },
+    /**
+ *
+ */
+    get hexColors(): Array < string > {
 
         return Object
             .keys(this.listOfColors)
-            .map((key : string) => this.listOfColors[key]as string);
+            .map((key : string) => this.listOfColors[key]);
 
-    };
+    },
 
-    static getHexColor(color : string) {
+    /**
+     * check if hex has 3 sybmol e.g #222 or #fff
+     * @param hex
+     */
+    noramlizeHex: function (hex : string): string {
 
-        return color.indexOf('#') !== -1
-            ? color
-            : this.listOfColors[color.toLowerCase()];
+        const normalizedHex = hex.slice(1);
 
-    }
+        return normalizedHex.length === 3
+            ? `#${normalizedHex.repeat(2)}`
+            : hex
 
-    static toCssNameFromHex(color : string) {
+    },
+    /**
+     *
+     */
+    getHexColor: function (color : string) {
 
-        const index = Object
+        color = color.toLowerCase();
+
+        if (!this.exist(color)) 
+            throw errMessage(color);
+        
+        if (color.indexOf('#') !== -1) 
+            return this.listOfColors[color];
+        else 
+            return this.noramlizeHex(color)
+
+        /**
+         *
+         */
+
+    },
+
+    getColorName: function (color : string): string {
+
+        if(color.toLowerCase().indexOf('#') === -1) 
+            return color.toLowerCase();
+        else 
+            return this.toCssNameFromHex(this.noramlizeHex(color.toLowerCase()));
+        }
+    ,
+
+    toCssNameFromHex: function (color : string) {
+
+        return Object
             .keys(this.listOfColors)
-            .findIndex((index) => index === color);
+            .find(key => this.listOfColors[key] === color);
+    },
 
-        return this.listOfColors[index];
-    }
+    toRgb: function (color : string): RgbObject {
 
-    static toRgb(color : string) : RgbObject {
-
-        const HexColor = Color
+        const HexColor = this
             .getHexColor(color)
             .replace('#', '');
 
@@ -204,9 +238,13 @@ class Color {
             G: parseInt(HexColor.substring(2, 4), 16),
             B: parseInt(HexColor.substring(4, 6), 16)
         }
-    }
+    },
 
-    static toHexFromRgb({R, G, B} : RgbObject) {
+    /**
+     *
+     * @param param0
+     */
+    toHexFromRgb: function ({R, G, B} : RgbObject) {
 
         let r = R.toString(16);
         let g = G.toString(16);
@@ -221,60 +259,67 @@ class Color {
         
         return `#${ (r + g + b).toUpperCase()}`;
 
-    }
+    },
 
-    toHex(n : number) {
-        let hex = n.toString(16);
+    /**
+     *
+     * @param colors
+     */
+    normlize: function (data : string | Array < string >): Array < string > | string {
 
-        while (hex.length < 2) {
-            hex = "0" + hex;
-        }
-        return hex;
-    }
+        if(Array.isArray(data)) {
 
-    toHexString() : string {
-        var r = this.toHex(this.red);
-        var g = this.toHex(this.green);
-        var b = this.toHex(this.blue);
-        return "#" + r + g + b;
-    }
+            const normalizedColors = data.map(color => {
 
-    toName() : string {
-            let r,
-            g,
-            b,
-            colorhexs = Color.hexColors;
-        for (let i = colorhexs.length; --i;) {
-            r = parseInt(colorhexs[i].substr(0, 2), 16);
-            g = parseInt(colorhexs[i].substr(2, 2), 16);
-            b = parseInt(colorhexs[i].substr(4, 2), 16);
-            if (this.red == r && this.green == g && this.blue == b) {
-                return Color.colors[i];
+                if (this.isHex(color)) 
+                    color = this.noramlizeHex(color);
+                if (this.exist(color)) {
+                    return this.getColorName(color);
+                } else {
+                    console.warn(errMessage(color))
+                }
+
+            });
+            return normalizedColors.filter(Boolean);
+        } else {
+            if (this.isHex(data)) {
+                return this.noramlizeHex(data)
+            } else if (this.exist(data)) 
+                return data;
+            else 
+                throw errMessage(data);
+
             }
-        }
-        return "";
+        
+    },
 
-    }
-
-    toRgbString() : string {
-        return "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")";
-
-    }
-
+    isHex: (color : string): boolean => {
+        return color.indexOf('#') !== -1;
+    },
     /**
      *
      * @param color
      */
-    static exist(color : string) : boolean {
+    exist: function (color : string): boolean {
 
         const existHex = Color
             .hexColors
-            .indexOf(color.toLowerCase()) !== -1;
+            .indexOf(this.noramlizeHex(color.toLowerCase())) !== -1;
         const existName = Color
             .colors
             .indexOf(color.toLowerCase()) !== -1;
 
         return existHex || existName
+},
+
+validate: function (color : string) {
+
+    if (this.exist(color)) 
+        return this.normlize(color);
+    else {
+        throw errMessage(color)
+    }
+
 }
 
 }
