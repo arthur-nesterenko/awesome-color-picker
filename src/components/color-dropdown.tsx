@@ -8,17 +8,28 @@ interface ColorDropDownProps {
     isOpen : string,
     onTrigger : any,
     colors : Array < string >,
-    activeColor : string
+    selected : any,
+    onSelect : any
 }
 
-const ColorDropDown : React.SFC < ColorDropDownProps > = ({colors, activeColor, isOpen, onClick, onTrigger}) => (
+const ColorDropDown : React.SFC < ColorDropDownProps > = ({
+    colors,
+    selected,
+    isOpen,
+    onClick,
+    onTrigger,
+    onSelect
+}) => (
     <div className='awesomeColorDropDown'>
         <button className='awesomeBtn' onClick={onTrigger}>▼</button>
-        <ul className={isOpen
+        <ul
+            onClick={onSelect}
+            className={isOpen
             ? 'awesomeOpen'
             : ''}>
             {colors.map(color => <li
-                className={color === activeColor
+                data-value={color}
+                className={color === selected
                 ? 'awesomeActive'
                 : ''}
                 key={color}>

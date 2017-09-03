@@ -1,17 +1,19 @@
 import * as React from 'react';
-import {Component} from 'react';
+import {PureComponent} from 'react';
 import {findDOMNode} from 'react-dom';
 
 interface DropdownState {
-    isOpen : boolean
+    isOpen : boolean,
+    selected : any
 }
 
 function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React.StatelessComponent < any >,) : React.ComponentClass < any > {
-    return class HOCDropDown extends React.Component < any,
+    return class HOCDropDown extends React.PureComponent < any,
     DropdownState > {
 
         state = {
-            isOpen: false
+            isOpen: false,
+            selected: ''
         }
 
         componentDidMount() {
@@ -39,14 +41,33 @@ function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React
             isOpen: !prevState.isOpen
         }));
 
+        onSelect = (e : any) => {
+            const target = e.target;
+            const targetTagName = 'LI';
+
+            const targerElem = (target.tagName === targetTagName)
+                ? target
+                : (target.parentNode.tagName === targetTagName)
+                    ? target.parentNode
+                    : undefined;
+
+            if (targerElem) {
+                const val = targerElem.getAttribute('data-value');
+                this.setState({selected: val})
+            }
+
+        }
+
         render() {
 
+            console.log(this.state)
             return <WrappedComponent
                 {...this.props}
                 {...this.state}
                 onTrigger={this.onTrigger}
                 onOpen={this.onOpen}
-                onClose={this.onClose}/>
+                onClose={this.onClose}
+                onSelect={this.onSelect}/>
         }
     }
 }

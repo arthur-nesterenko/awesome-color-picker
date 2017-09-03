@@ -83,8 +83,11 @@ $greyColor: #eee;
         justify-content:  space-between;
         align-items: center;
         padding: 15px;
-        margin-bottom: 5px;
         border-bottom: 1px solid $greyColor;
+
+        &:hover{
+            cursor: pointer;
+        }
 
 
         &::last-child{
