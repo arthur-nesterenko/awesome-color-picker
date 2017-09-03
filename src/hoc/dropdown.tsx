@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
+import {findDOMNode} from 'react-dom';
 
 interface DropdownState {
     isOpen : boolean
@@ -13,11 +14,30 @@ function dropdown < P > (WrappedComponent : React.ComponentClass < any > | React
             isOpen: false
         }
 
+        componentDidMount() {
+
+            window.addEventListener('click', this._onWindowClick.bind(this));
+            window.addEventListener('touchstart', this._onWindowClick.bind(this));
+        }
+
+        componentWillUnmount() {
+            window.removeEventListener('click', this._onWindowClick.bind(this));
+            window.removeEventListener('touchstart', this._onWindowClick.bind(this));
+        }
+
+        _onWindowClick(event : any) {
+
+            const dropdownElement = findDOMNode(this);
+            if (event.target !== dropdownElement && !dropdownElement.contains(event.target) && this.state.isOpen) {
+                this.onClose()
+            }
+        }
+
         onOpen = () => this.setState({isOpen: true});
         onClose = () => this.setState({isOpen: false});
         onTrigger = () => this.setState((prevState) => ({
             isOpen: !prevState.isOpen
-        }))
+        }));
 
         render() {
 
