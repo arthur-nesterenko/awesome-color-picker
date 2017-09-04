@@ -193,11 +193,11 @@ const Color = {
     /**
      *
      */
-    getHexColor: function (color : string) {
+    getHexColor: function (color : string, validate : boolean = false) {
 
         color = color.toLowerCase();
 
-        if (!this.exist(color)) 
+        if (validate && !this.exist(color)) 
             throw errMessage(color);
         
         if (color.indexOf('#') === -1) 
@@ -217,7 +217,7 @@ const Color = {
         if (color.indexOf('#') === -1) 
             return color;
         else 
-            return this.toCssNameFromHex(this.noramlizeHex(color));
+            return this.toCssNameFromHex(this.noramlizeHex(color.toLowerCase()));
         }
     ,
 
@@ -229,6 +229,8 @@ const Color = {
     },
 
     toRgb: function (color : string): RgbObject {
+
+        color = color.toLowerCase();
 
         const HexColor = this
             .getHexColor(color)
@@ -303,12 +305,15 @@ const Color = {
      */
     exist: function (color : string): boolean {
 
+        color = color.toLowerCase();
+
         const existHex = Color
             .hexColors
-            .indexOf(this.noramlizeHex(color.toLowerCase())) !== -1;
+            .indexOf(this.noramlizeHex(color)) !== -1;
+
         const existName = Color
             .colors
-            .indexOf(color.toLowerCase()) !== -1;
+            .indexOf(color) !== -1;
 
         return existHex || existName
 },

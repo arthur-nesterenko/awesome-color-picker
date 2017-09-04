@@ -43,10 +43,12 @@ ColorPickerState > {
 
         if (this.props.colors) {
             colors = Color.normlize(this.props.colors)as Array < string >;
+
             /**
              * Check if initial value different from custom array,
              */
-            if (this.props.value && (colors.indexOf(Color.getColorName(this.props.value)) !== -1)) {
+            if (this.props.value && (colors.indexOf(Color.getColorName(this.props.value)) === -1)) {
+
                 colors = [
                     ...colors,
                     Color.getColorName(this.props.value)

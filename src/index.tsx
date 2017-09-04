@@ -5,4 +5,4 @@ import ColorPicker from './containers/color-picker';
 const colors = ['green', 'red', '#fff', '#eee']
 
 render(
-    <ColorPicker colors={colors}/>, document.getElementById('root'));
+    <ColorPicker value='yellow' colors={colors}/>, document.getElementById('root'));
