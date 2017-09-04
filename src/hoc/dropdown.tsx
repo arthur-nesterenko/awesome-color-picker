@@ -4,7 +4,7 @@ import {findDOMNode} from 'react-dom';
 
 interface DropdownState {
     isOpen : boolean,
-    selected : any
+    selected : string
 }
 
 function dropdown(WrappedComponent : React.ComponentClass < any > | React.StatelessComponent < any >,) : React.ComponentClass < any > {
@@ -42,9 +42,9 @@ function dropdown(WrappedComponent : React.ComponentClass < any > | React.Statel
             isOpen: !prevState.isOpen
         }));
 
-        onSelect = (e : any) => {
-            const target = e.target;
-            const parentNode = target.parentNode;
+        onSelect = (e : Event) => {
+            const target = e.target as HTMLElement;
+            const parentNode = target.parentNode as HTMLElement;
             const targetTagName = 'LI';
 
             const targerElem = (target.tagName === targetTagName)

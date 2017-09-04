@@ -4,22 +4,14 @@ import DropdownItem from './color-dropdown-item';
 
 interface ColorDropDownProps {
     onChange : void,
-    onClick?: any,
     isOpen : string,
-    onTrigger : any,
+    onTrigger : () => void,
     colors : object,
     selected : string,
-    onSelect : any
+    onSelect : (e : any) => void
 }
 
-const ColorDropDown : React.SFC < ColorDropDownProps > = ({
-    colors,
-    selected,
-    isOpen,
-    onClick,
-    onTrigger,
-    onSelect
-}) => (
+const ColorDropDown : React.SFC < ColorDropDownProps > = ({colors, selected, isOpen, onTrigger, onSelect}) => (
     <div className='awesomeColorDropDown'>
         <button className='awesomeBtn' onClick={onTrigger}>▼</button>
         <ul

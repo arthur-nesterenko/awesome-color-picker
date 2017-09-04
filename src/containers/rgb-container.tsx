@@ -10,8 +10,8 @@ interface RgbContainerState {
 
 interface RgbContainerProps {
     activeColor : string,
-    onChange : any,
-    onClose?: any
+    onChange : (e : any) => void,
+    onClose?: () => void
 }
 
 interface Object {
@@ -60,9 +60,9 @@ RgbContainerState > {
             .onClose()
     }
 
-    onChange = (e : Event) => {
+    onChange = (e : any) => {
 
-        const target = e.target as HTMLInputElement;
+        const target = e.currentTarget;
         const {isChanged} = this.state;
 
         if (!isChanged) {

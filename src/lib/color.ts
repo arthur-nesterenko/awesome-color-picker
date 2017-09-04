@@ -4,10 +4,6 @@ export interface RgbObject {
     B : number
 }
 
-export interface ListOfColors {
-    [key : string] : string
-}
-
 const errMessage = (color : string) : string => `for ${color} is not supported format should be hex or css Name , all color names Supported by All Browsers (https://www.w3schools.com/colors/colors_names.asp)`;
 
 /**

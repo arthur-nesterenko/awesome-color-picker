@@ -3,11 +3,17 @@ import RgbDropDown from './../components/rgb-dropdown';
 import ColorDropDown from './../components//color-dropdown';
 import ColorInput from './../components/color-input'
 import './../styles/styles.scss';
-import Color from './../lib/color';
+import Color, {RgbObject} from './../lib/color';
+
+interface onChangeProps {
+    hex : string
+    name : string,
+    rgb : RgbObject
+}
 
 interface ColorPickerProps {
     value?: string
-    onChange?: any,
+    onChange?: (data : onChangeProps) => void,
     colors?: Array < string >
 }
 
@@ -70,7 +76,7 @@ ColorPickerState > {
                 .onChange({
                     hex: Color.getHexColor(newColor),
                     name: newColor,
-                    rgb: [0, 0, 0]
+                    rgb: Color.toRgb(newColor)
                 })
         }
     }
@@ -78,12 +84,13 @@ ColorPickerState > {
     render() : JSX.Element {
 
         const {currentColor, colors} = this.state;
-
-        console.log(currentColor);
         return <div className='awesomeColorPicker'>
                 <ColorInput value={currentColor}/>
                 <RgbDropDown currentColor={currentColor} onChange={this.onChange}/>
-                <ColorDropDown onChange={this.onChange} selected={'#ffff00'} colors={colors}/>
+                <ColorDropDown
+                    onChange={this.onChange}
+                    selected={currentColor}
+                    colors={colors}/>
             </div>
     }
 }

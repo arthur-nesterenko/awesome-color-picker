@@ -2,7 +2,9 @@ import * as React from 'react';
 import {render} from "react-dom";
 import ColorPicker from './containers/color-picker';
 
-const colors = ['green', 'red', '#fff', '#eee']
+const onChange = (data) => {
 
+    console.log(data, '---');
+}
 render(
-    <ColorPicker value='yellow'/>, document.getElementById('root'));
+    <ColorPicker onChange={onChange}/>, document.getElementById('root'));

@@ -4,10 +4,10 @@ import RgbContainer from './../containers//rgb-container';
 
 interface RgbDropDownProps {
     currentColor : string,
-    onTrigger : any,
+    onTrigger : () => void,
     isOpen : boolean,
-    onChange : void,
-    onClose : any
+    onChange : () => void,
+    onClose : () => void
 }
 
 const RgbDropDown : React.SFC < RgbDropDownProps > = ({currentColor, isOpen, onClose, onTrigger, onChange}) => (
