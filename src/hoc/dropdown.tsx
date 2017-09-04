@@ -13,7 +13,9 @@ function dropdown(WrappedComponent : React.ComponentClass < any > | React.Statel
 
         state = {
             isOpen: false,
-            selected: ''
+            selected: this.props.selected
+                ? this.props.selected
+                : ''
         }
 
         componentDidMount() {

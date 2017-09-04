@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Dropdown from './../hoc//dropdown'
+import DropdownItem from './color-dropdown-item';
 
 interface ColorDropDownProps {
     onChange : void,
     onClick?: any,
     isOpen : string,
     onTrigger : any,
-    colors : Array < string >,
-    selected : any,
+    colors : object,
+    selected : string,
     onSelect : any
 }
 
@@ -26,20 +27,14 @@ const ColorDropDown : React.SFC < ColorDropDownProps > = ({
             className={isOpen
             ? 'awesomeOpen'
             : ''}>
-            {colors.map(color => <li
-                data-value={color}
-                className={color === selected
-                ? 'awesomeActive'
-                : ''}
-                key={color}>
-                <span>
-                    {color}</span>
-                <span
-                    className='awesomeColorSquare'
-                    style={{
-                    backgroundColor: color
-                }}></span>
-            </li>)}
+
+            {Object
+                .keys(colors)
+                .map(color => <DropdownItem
+                    key={color}
+                    colorName={color}
+                    isSelected={colors[color] === selected}
+                    value={colors[color]}/>)}
         </ul>
     </div>
 )

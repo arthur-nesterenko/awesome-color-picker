@@ -4,6 +4,10 @@ export interface RgbObject {
     B : number
 }
 
+export interface ListOfColors {
+    [key : string] : string
+}
+
 const errMessage = (color : string) : string => `for ${color} is not supported format should be hex or css Name , all color names Supported by All Browsers (https://www.w3schools.com/colors/colors_names.asp)`;
 
 /**
@@ -11,6 +15,15 @@ const errMessage = (color : string) : string => `for ${color} is not supported f
  */
 const Color = {
 
+    /**
+     *
+     */
+    _toColorObject: function (color : string): object {
+
+        return {
+            [this.getColorName(color)]: this.getHexColor(color)
+        }
+    },
     /**
      *
      */
@@ -190,6 +203,7 @@ const Color = {
             : hex
 
     },
+
     /**
      *
      */
@@ -264,31 +278,32 @@ const Color = {
 
     },
 
-    /**
-     *
-     * @param colors
-     */
-    normlize: function (data : string | Array < string >): string | Array < string > {
+    normalize: function (data : Array < string >| string): object {
 
         if(Array.isArray(data)) {
+            const d = data.map(color => {
 
-            const normalizedColors = data.map(color => {
-
-                if (this.isHex(color)) 
-                    color = this.noramlizeHex(color);
+                color = color.toLowerCase();
                 if (this.exist(color)) {
-                    return this.getColorName(color);
+                    return this._toColorObject(color)
+
                 } else {
                     console.warn(errMessage(color))
-                }
+                    }
+                })
+                .filter(Boolean)
+                .reduce((obj, item, s, r) => {
+                    const key = Object.keys(item)[0];
+                    obj[key] = item[key]
+                    return obj
+                }, {})
 
-            });
-            return normalizedColors.filter(Boolean);
+            return d;
         } else {
-            if (this.isHex(data)) {
-                return this.noramlizeHex(data)
-            } else if (this.exist(data)) 
-                return data;
+
+            data = data.toLowerCase();
+            if (this.exist(data)) 
+                return this._toColorObject(data)
             else 
                 throw errMessage(data);
 
@@ -318,10 +333,10 @@ const Color = {
         return existHex || existName
 },
 
-validate: function (color : string) {
+validate: function (color : string): string {
 
-    if (this.exist(color)) 
-        return this.normlize(color);
+    if(this.exist(color)) 
+        return this.getHexColor(color);
     else {
         throw errMessage(color)
     }

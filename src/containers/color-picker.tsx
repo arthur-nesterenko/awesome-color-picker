@@ -13,7 +13,7 @@ interface ColorPickerProps {
 
 interface ColorPickerState {
     currentColor : any,
-    colors : Array < string >
+    colors : object
 }
 
 class ColorPicker extends React.PureComponent < ColorPickerProps,
@@ -39,20 +39,16 @@ ColorPickerState > {
 
     _initialColors() {
 
-        let colors = Color.colors;
+        let colors = Color.listOfColors;
 
         if (this.props.colors) {
-            colors = Color.normlize(this.props.colors)as Array < string >;
+            colors = Color.normalize(this.props.colors)as object;
 
             /**
              * Check if initial value different from custom array,
              */
-            if (this.props.value && (colors.indexOf(Color.getColorName(this.props.value)) === -1)) {
-
-                colors = [
-                    ...colors,
-                    Color.getColorName(this.props.value)
-                ];
+            if (this.props.value && colors[Color.getColorName(this.props.value)]) {
+                colors = Object.assign({}, colors, Color.normalize(this.props.value))
             }
         }
 
@@ -81,17 +77,13 @@ ColorPickerState > {
 
     render() : JSX.Element {
 
-        const {currentColor} = this.state;
+        const {currentColor, colors} = this.state;
 
-        console.log(this.state);
-
+        console.log(currentColor);
         return <div className='awesomeColorPicker'>
                 <ColorInput value={currentColor}/>
                 <RgbDropDown currentColor={currentColor} onChange={this.onChange}/>
-                <ColorDropDown
-                    onChange={this.onChange}
-                    selected={Color.toCssNameFromHex(currentColor)}
-                    colors={this.state.colors}/>
+                <ColorDropDown onChange={this.onChange} selected={'#ffff00'} colors={colors}/>
             </div>
     }
 }

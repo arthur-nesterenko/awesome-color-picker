@@ -69,6 +69,14 @@ $greenColor: #81c784;
         @include default-border();
 
 }
+
+.awesomeColorName{
+    padding: 0 10px;
+
+    &:first-letter{
+        text-transform: uppercase;
+    }
+}
  .awesomeColorInput{
         line-height: 40px;
         padding: 5px;
@@ -94,7 +102,7 @@ $greenColor: #81c784;
         flex-direction: row;
         justify-content:  space-between;
         align-items: center;
-        padding: 15px;
+        padding: 20px;
         border-bottom: 1px solid $greyColor;
 
     
@@ -104,7 +112,7 @@ $greenColor: #81c784;
         }
 
 
-        &::last-child{
+        &:last-child{
             border-bottom: none;
         }
     }
