@@ -20,14 +20,44 @@ class ColorPicker extends React.PureComponent < ColorPickerProps,
 ColorPickerState > {
 
     state = {
-        currentColor: this.props.value
-            ? Color.validate(this.props.value)
-            : this.props.colors
-                ? Color.getHexColor(this.props.colors[0])
-                : Color.hexColors[0],
-        colors: this.props.colors
-            ? Color.normlize(this.props.colors)
-            : Color.colors
+        currentColor: this._initialCurrentColor(),
+        colors: this._initialColors()
+    }
+
+    _initialCurrentColor() {
+        if (this.props.value) {
+            return Color.validate(this.props.value);
+        } else if (this.props.colors) {
+            return Color.getHexColor(this.props.colors.slice().shift())
+        } else 
+            return Color
+                .hexColors
+                .slice()
+                .shift()
+
+        }
+
+    _initialColors() {
+
+        let colors = Color.colors;
+
+        if (this.props.colors) {
+            colors = Color.normlize(this.props.colors)as Array < string >;
+            /**
+             * Check if initial value different from custom array,
+             */
+            if (this.props.value && (colors.indexOf(Color.getColorName(this.props.value)) !== -1)) {
+                colors = [
+                    ...colors,
+                    Color.getColorName(this.props.value)
+                ];
+            }
+        }
+
+        /**
+         *
+         */
+        return colors;
     }
 
     onChange = (newColor : string) => {

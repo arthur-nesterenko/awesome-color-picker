@@ -1,4 +1,4 @@
-interface RgbObject {
+export interface RgbObject {
     R : number,
     G : number,
     B : number
@@ -200,7 +200,7 @@ const Color = {
         if (!this.exist(color)) 
             throw errMessage(color);
         
-        if (color.indexOf('#') !== -1) 
+        if (color.indexOf('#') === -1) 
             return this.listOfColors[color];
         else 
             return this.noramlizeHex(color)
@@ -212,11 +212,12 @@ const Color = {
     },
 
     getColorName: function (color : string): string {
+        color = color.toLowerCase();
 
-        if(color.toLowerCase().indexOf('#') === -1) 
-            return color.toLowerCase();
+        if (color.indexOf('#') === -1) 
+            return color;
         else 
-            return this.toCssNameFromHex(this.noramlizeHex(color.toLowerCase()));
+            return this.toCssNameFromHex(this.noramlizeHex(color));
         }
     ,
 
@@ -265,7 +266,7 @@ const Color = {
      *
      * @param colors
      */
-    normlize: function (data : string | Array < string >): Array < string > | string {
+    normlize: function (data : string | Array < string >): string | Array < string > {
 
         if(Array.isArray(data)) {
 

@@ -1,12 +1,6 @@
 import * as React from 'react';
 import RangeInput from './../components/range-input'
-import Color from './../lib/color'
-
-interface RgbObject {
-    R : number,
-    G : number,
-    B : number
-}
+import Color, {RgbObject} from './../lib/color'
 
 interface RgbContainerState {
     rgb : RgbObject,
@@ -20,8 +14,12 @@ interface RgbContainerProps {
     onClose?: any
 }
 
-class RgbContainer < RgbContainerProps,
-RgbContainerState > extends React.PureComponent {
+interface Object {
+    [key : string] : number
+}
+
+class RgbContainer extends React.PureComponent < RgbContainerProps,
+RgbContainerState > {
 
     state = {
         rgb: {
@@ -93,7 +91,7 @@ RgbContainerState > extends React.PureComponent {
         return <div>
                 {Object
                     .keys(rgb)
-                    .map((key : any) => <li key={key}><RangeInput name={key} value={rgb[key]} onChange={this.onChange}/>
+                    .map((key : string) => <li key={key}><RangeInput name={key} value={rgb[key]} onChange={this.onChange}/>
                     </li>)}
 
                 <li className='footer'>
