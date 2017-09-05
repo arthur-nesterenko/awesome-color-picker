@@ -45,6 +45,7 @@ function dropdown(WrappedComponent : React.ComponentClass < any > | React.Statel
         }
 
         onClose = () => this.setState({isOpen: false});
+
         onTrigger = () => this.setState((prevState) => ({
             isOpen: !prevState.isOpen
         }));

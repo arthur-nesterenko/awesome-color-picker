@@ -28,5 +28,4 @@ const RgbDropDown : React.SFC < RgbDropDownProps > = ({currentColor, isOpen, onC
     </div>
 );
 
-// RgbDropDown.defaultProps = {     color: 'white' }
 export default Dropdown(RgbDropDown);

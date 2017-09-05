@@ -10234,9 +10234,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(13);
 ;
 const RangeInput = (props) => (React.createElement("div", null,
-    React.createElement("span", null, props
-        .name
-        .toUpperCase()),
+    React.createElement("span", null,
+        props
+            .name
+            .toUpperCase(),
+        ' ',
+        props.value),
     React.createElement("input", Object.assign({ className: 'awesomeRangeInput', type: "range" }, props, { min: '0', max: '255' }))));
 exports.default = RangeInput;
 

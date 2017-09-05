@@ -10,7 +10,7 @@ const RangeInput : React.SFC < RangeInputProps > = (props) => (
     <div>
         <span>{props
                 .name
-                .toUpperCase()}</span>
+                .toUpperCase()}{' '}{props.value}</span>
         <input className='awesomeRangeInput' type="range" {...props} min='0' max='255'/></div>
 );
 

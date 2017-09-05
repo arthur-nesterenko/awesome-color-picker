@@ -187,6 +187,7 @@ const Color = {
     },
 
     /**
+     * @description
      * check if hex has 3 sybmol e.g #222 or #fff
      * @param hex
      */
@@ -275,7 +276,8 @@ const Color = {
 
     },
     /**
-     *
+     * @description
+     * remove duplicate colors
      */
     _uniq: function (colors : Array < string >) {
 
@@ -284,6 +286,10 @@ const Color = {
 
     },
 
+    /**
+     * @description
+     * normalize array of colors to object <name:hex>
+     */
     normalize: function (data : Array < string >| string): object {
 
         if(Array.isArray(data)) {
@@ -315,7 +321,9 @@ const Color = {
             }
         
     },
-
+    /**
+ *
+ */
     isHex: (color : string): boolean => {
         return color.indexOf('#') !== -1;
     },
@@ -338,6 +346,9 @@ const Color = {
         return existHex || existName
 },
 
+/**
+ * @description return color if  exist else throw Error
+ */
 validate: function (color : string): string {
 
     if(this.exist(color)) 
