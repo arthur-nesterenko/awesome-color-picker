@@ -85,6 +85,8 @@ ColorPickerState > {
     render() : JSX.Element {
 
         const {currentColor, colors} = this.state;
+
+        // console.log(currentColor);
         return <div className='awesomeColorPicker'>
                 <ColorInput value={currentColor}/>
                 <RgbDropDown currentColor={currentColor} onChange={this.onChange}/>
@@ -93,7 +95,7 @@ ColorPickerState > {
                     selected={currentColor}
                     colors={colors}/>
             </div>
+        }
     }
-}
 
-export default ColorPicker;
+    export default ColorPicker;

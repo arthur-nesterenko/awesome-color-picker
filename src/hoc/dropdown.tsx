@@ -18,6 +18,13 @@ function dropdown(WrappedComponent : React.ComponentClass < any > | React.Statel
                 : ''
         }
 
+        componentWillReceiveProps(nextProps : any) {
+            this.setState({
+                selected: nextProps.currentColor || nextProps.selected
+            })
+
+        }
+
         componentDidMount() {
 
             window.addEventListener('click', this._onWindowClick.bind(this));
@@ -66,6 +73,7 @@ function dropdown(WrappedComponent : React.ComponentClass < any > | React.Statel
         }
 
         render() {
+
             return <WrappedComponent
                 {...this.props}
                 {...this.state}

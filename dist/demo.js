@@ -6602,6 +6602,11 @@ function dropdown(WrappedComponent) {
                 this.onClose();
             };
         }
+        componentWillReceiveProps(nextProps) {
+            this.setState({
+                selected: nextProps.currentColor || nextProps.selected
+            });
+        }
         componentDidMount() {
             window.addEventListener('click', this._onWindowClick.bind(this));
             window.addEventListener('touchstart', this._onWindowClick.bind(this));
