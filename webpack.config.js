@@ -1,9 +1,12 @@
 var path = require('path');
 
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: {
+        datepicker: "./src/index.tsx",
+        demo: './demo/app.tsx'
+    },
     output: {
-        filename: "bundle.js",
+        filename: "[name].js",
         path: __dirname + "/dist"
     },
 

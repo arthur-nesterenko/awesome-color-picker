@@ -203,7 +203,7 @@ const Color = {
     /**
      *
      */
-    getHexColor: function (color : string, validate : boolean = false) {
+    getHexColor: function (color : string, validate : boolean = false): string {
 
         color = color.toLowerCase();
 
@@ -224,9 +224,10 @@ const Color = {
     getColorName: function (color : string): string {
         color = color.toLowerCase();
 
-        if (color.indexOf('#') === -1) 
+        if (color.indexOf('#') === -1) {
+
             return color;
-        else 
+        } else 
             return this.toCssNameFromHex(this.noramlizeHex(color.toLowerCase()));
         }
     ,
@@ -273,12 +274,21 @@ const Color = {
         return `#${ (r + g + b).toUpperCase()}`;
 
     },
+    /**
+     *
+     */
+    _uniq: function (colors : Array < string >) {
+
+        let hexColors = colors.map(color => this.getHexColor(color, true));
+        return hexColors.filter((item, index) => hexColors.indexOf(item) === index);
+
+    },
 
     normalize: function (data : Array < string >| string): object {
 
         if(Array.isArray(data)) {
-            const d = data.map(color => {
-
+            return this._uniq(data) // remove duplicates
+                .map(color => {
                 color = color.toLowerCase();
                 if (this.exist(color)) {
                     return this._toColorObject(color)
@@ -294,7 +304,6 @@ const Color = {
                     return obj
                 }, {})
 
-            return d;
         } else {
 
             data = data.toLowerCase();

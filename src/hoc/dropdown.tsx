@@ -42,9 +42,9 @@ function dropdown(WrappedComponent : React.ComponentClass < any > | React.Statel
             isOpen: !prevState.isOpen
         }));
 
-        onSelect = (e : Event) => {
-            const target = e.target as HTMLElement;
-            const parentNode = target.parentNode as HTMLElement;
+        onSelect = (e : any) => {
+            const target = e.target;
+            const parentNode = target.parentNode;
             const targetTagName = 'LI';
 
             const targerElem = (target.tagName === targetTagName)

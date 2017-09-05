@@ -11,7 +11,7 @@ interface onChangeProps {
     rgb : RgbObject
 }
 
-interface ColorPickerProps {
+export interface ColorPickerProps {
     value?: string
     onChange?: (data : onChangeProps) => void,
     colors?: Array < string >
@@ -53,7 +53,8 @@ ColorPickerState > {
             /**
              * Check if initial value different from custom array,
              */
-            if (this.props.value && colors[Color.getColorName(this.props.value)]) {
+
+            if (this.props.value && !colors[Color.getColorName(this.props.value)]) {
                 colors = Object.assign({}, colors, Color.normalize(this.props.value))
             }
         }
@@ -96,4 +97,3 @@ ColorPickerState > {
 }
 
 export default ColorPicker;
-``
