@@ -304,7 +304,7 @@ const Color = {
                     }
                 })
                 .filter(Boolean)
-                .reduce((obj, item, s, r) => {
+                .reduce( (obj, item ) => {
                     const key = Object.keys(item)[0];
                     obj[key] = item[key]
                     return obj
